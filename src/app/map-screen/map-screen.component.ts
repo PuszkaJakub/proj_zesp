@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, inject } from '@angular/core';
-import * as L from 'leaflet';
+
 
 @Component({
   selector: 'app-map-screen',
@@ -13,10 +13,10 @@ export class MapScreenComponent implements OnInit{
   private map: any;
 
   ngOnInit(){
+    this.callForData.emit();
     import('leaflet').then(L => {
       this.initMap(L,);
     });  
-    this.callForData.emit();
   }
   private initMap(L: typeof import('leaflet'), ): void {
     this.map = L.map('map', {

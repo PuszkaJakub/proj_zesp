@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(private touristApi: TouristApiService) {}
 
   fetchData() {
-    this.touristApi.getData().subscribe((response) =>{
+    this.touristApi.getPins().subscribe((response) =>{
       console.log(response);
     });
   }
