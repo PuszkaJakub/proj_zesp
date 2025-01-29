@@ -64,6 +64,69 @@
   }
 }
 
+.add-place-container {
+  max-width: 650px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+ 
+ .title {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 36px;
+    line-height: 48px;
+    padding-bottom: 48px;
+ }
+}
+
+.add-place-form  {
+  .form-field {
+     position: relative;
+     margin: 32px 0;
+  }
+  .input-text {
+     display: block;
+     width: 100%;
+     height: 36px;
+     border-width: 0 0 2px 0;
+     border-color: #000;
+     font-size: 18px;
+     line-height: 26px;
+     font-weight: 400;
+     
+     &:focus {
+        outline: none;
+     }
+  }
+  .label {
+     position: absolute;
+     left: 20px;
+     bottom: 11px;
+     font-size: 18px;
+     line-height: 26px;
+     font-weight: 400;
+     color: #888;
+     cursor: text;
+     transform: translateY(-24px);
+     transition: transform .2s ease-in-out;
+  }
+  
+  .submit-btn {
+     display: inline-block;
+     background-color: #3864f3;
+     color: #fff;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     font-size: 16px;
+     line-height: 24px;
+     padding: 8px 16px;
+     border: none;
+     cursor: pointer;
+  }
+}
+
 .add-new-place-button {
   position: absolute;
   padding: 1rem;
@@ -73,7 +136,12 @@
   z-index: 1000000;
   color: white;
   font-weight: bold;
-  background-color: #3864f3;;
+  background-color: #3864f3;
+  transition: background-color .3s;
+  
+  &:hover{
+    background-color: #213577;
+  }
 }
 
 .map-container {

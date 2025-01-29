@@ -20,4 +20,10 @@ export class AppComponent {
       this.placeListInfo = response;
     });
   }
+
+  sendData(place: any){
+    this.touristApi.addPin(place).subscribe((response) =>{
+      console.log(response);
+    });
+  }
 }

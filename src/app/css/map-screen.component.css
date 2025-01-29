@@ -1,0 +1,174 @@
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1800px;
+  background-color: #ecf8ea;
+}
+.wrapper button {
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+}
+
+.info-container {
+  width: 40%;
+  padding-right: 0.5rem;
+}
+.info-container h2 {
+  text-align: center;
+  padding: 2rem;
+  text-transform: uppercase;
+}
+
+.places-container {
+  width: 100%;
+  height: 80vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.place-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem 0.8rem;
+  border: 2px solid gray;
+  border-radius: 20px;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+.place-item--name {
+  text-align: center;
+  padding: 1rem;
+  color: #3864f3;
+  font-weight: bold;
+}
+.place-item--info {
+  padding: 0.5rem;
+}
+.place-item--review {
+  color: rgb(240, 185, 6);
+}
+.place-item:hover {
+  background-color: #e9e9e9;
+}
+
+.add-place-container {
+  max-width: 650px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.add-place-container .title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 36px;
+  line-height: 48px;
+  padding-bottom: 48px;
+}
+
+.add-place-form .form-field {
+  position: relative;
+  margin: 32px 0;
+}
+.add-place-form .input-text {
+  display: block;
+  width: 100%;
+  height: 36px;
+  border-width: 0 0 2px 0;
+  border-color: #000;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+}
+.add-place-form .input-text:focus {
+  outline: none;
+}
+.add-place-form .label {
+  position: absolute;
+  left: 20px;
+  bottom: 11px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #888;
+  cursor: text;
+  transform: translateY(-24px);
+  transition: transform 0.2s ease-in-out;
+}
+.add-place-form .submit-btn {
+  display: inline-block;
+  background-color: #3864f3;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-new-place-button {
+  position: absolute;
+  padding: 1rem;
+  margin: 1rem;
+  bottom: 0;
+  border-radius: 20px;
+  z-index: 1000000;
+  color: white;
+  font-weight: bold;
+  background-color: #3864f3;
+  transition: background-color 0.3s;
+}
+.add-new-place-button:hover {
+  background-color: #213577;
+}
+
+.map-container {
+  position: relative;
+  align-self: flex-end;
+  width: 60%;
+  margin: 1rem 1rem 1rem 0rem;
+}
+
+.map-frame {
+  position: relative;
+  border: 2px solid black;
+  height: 50%;
+}
+
+#map {
+  height: 90vh;
+}
+
+.navigate {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 5vh;
+  background-color: rgb(214, 212, 212);
+  color: #000;
+  border-radius: 0px 0px 25px 25px;
+}
+.navigate h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 2rem;
+}
+.navigate button {
+  top: 0;
+  left: 50%;
+  align-self: flex-end;
+}/*# sourceMappingURL=map-screen.component.css.map */

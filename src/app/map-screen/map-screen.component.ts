@@ -6,6 +6,7 @@ import {
   Input,
   inject,
 } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import * as L from 'leaflet';
 
 class Place {
@@ -41,6 +42,7 @@ class Place {
 })
 export class MapScreenComponent implements OnInit {
   @Output() callForData = new EventEmitter();
+  @Output() addNewData = new EventEmitter<Place>();
 
   private _placeList: Place[] = [];
   public get placeList(): Place[] {
@@ -48,13 +50,17 @@ export class MapScreenComponent implements OnInit {
   }
   @Input()
   public set placeList(response: any) {
-    this._placeList = response.map((item:any) => 
-      new Place(item.id, item.type, item.title, item.description, [item.y, item.x], item.average_rate)
+    this._placeList = response.map(
+      (item: any) =>
+        new Place(
+          item.id,
+          item.type,
+          item.title,
+          item.description,
+          [item.y, item.x],
+          item.average_rate
+        )
     );
-    // for (const item of response) {
-    //   this._placeList.push(new Place(item.id, item.type, item.title, item.description, [item.y, item.x], item.average_rate));
-    //   // console.log(item)
-    // }
   }
 
   constructor() {}
@@ -62,6 +68,19 @@ export class MapScreenComponent implements OnInit {
   private marker = L.marker([52.06, 19.25]);
 
   addNewPlace = false;
+  newPlacePosition: [number,number] = [0, 0];
+  newPlaceTitle = "";
+  onTitleInputChange(event:Event){
+    this.newPlaceTitle = (event.target as HTMLInputElement).value;
+  }
+  newPlaceDescription = "";
+  onDescriptionInputChange(event:Event){
+    this.newPlaceDescription = (event.target as HTMLInputElement).value;
+  }
+  newPlaceType = "Atrakcja"
+  onTypeSelectChange(event:Event){
+    this.newPlaceType = (event.target as HTMLInputElement).value;
+  }
 
   ngOnInit() {
     this.callForData.emit();
@@ -78,7 +97,6 @@ export class MapScreenComponent implements OnInit {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
 
- 
     // L.marker(this.placeList.coords).addTo(this.map)
   }
 
@@ -90,7 +108,27 @@ export class MapScreenComponent implements OnInit {
     this.marker.bindPopup('To tutaj!').openPopup();
   }
 
-  alamakota(){
-    console.log(this.placeList)
+  addPlaceInterface() {
+    this.addNewPlace = true;
+    this.map.on('click', (e: any) => {
+      this.addPlaceUpdatePostion(e.latlng);
+    });
+  }
+
+  public addPlaceUpdatePostion(position: L.LatLng): void {
+    if (this.marker) {
+      this.map.removeLayer(this.marker);
+    }
+    this.map.panTo(position);
+    this.marker = L.marker([position.lat, position.lng]).addTo(this.map);
+    this.marker.bindPopup('Twoje nowe miejsce znajduje się tutaj!').openPopup();
+
+    this.newPlacePosition = [position.lat, position.lng];
+    console.log(this.newPlacePosition);
+  }
+
+  addPlaceSendForm() {
+    this.addNewPlace = false;
+    this.addNewData.emit(new Place(0, this.newPlaceType, this.newPlaceTitle, this.newPlaceDescription, this.newPlacePosition, 5))
   }
 }
