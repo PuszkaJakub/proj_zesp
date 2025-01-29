@@ -8,17 +8,28 @@ import {
 } from '@angular/core';
 import * as L from 'leaflet';
 
-class Pizza {
-  name: string;
-  number: number;
-  category: string;
-  price: number;
+class Place {
+  type: string;
+  title: string;
+  description: string;
+  coords: [number, number];
+  rate: number;
+  id: number;
 
-  constructor(name: string, number: number, category: string, price: number) {
-    this.name = name;
-    this.number = number;
-    this.category = category;
-    this.price = price;
+  constructor(
+    type: string,
+    title: string,
+    description: string,
+    coords: [number, number],
+    rate: number,
+    id: number
+  ) {
+    this.type = type;
+    this.title = title;
+    this.description = description;
+    this.coords = coords;
+    this.rate = rate;
+    this.id = id;
   }
 }
 
@@ -37,7 +48,6 @@ export class MapScreenComponent implements OnInit {
     this.callForData.emit();
 
     this.initMap();
-
   }
   private initMap(): void {
     this.map = L.map('map', {
