@@ -13,10 +13,11 @@ import { TouristApiService } from './tourist-api.service';
 export class AppComponent {
   title = "kamperyNG"
   constructor(private touristApi: TouristApiService) {}
+  placeListInfo: any=[];
 
   fetchData() {
     this.touristApi.getPins().subscribe((response) =>{
-      console.log(response);
+      this.placeListInfo = response;
     });
   }
 }

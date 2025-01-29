@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class TouristApiService {
   constructor(private httpClient: HttpClient) {}
 
-  public getPins(): Observable<any>{
+  public getPins(){
     return this.httpClient.get('https://tourist.visoft.dev/get_pins');
   }
 
