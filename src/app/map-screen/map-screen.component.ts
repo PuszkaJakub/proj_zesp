@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, inject } from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
@@ -8,6 +8,7 @@ import * as L from 'leaflet';
   styleUrl: './map-screen.component.scss'
 })
 export class MapScreenComponent implements OnInit{
+  @Output() callForData = new EventEmitter();
   constructor() { }
   private map: any;
 
@@ -15,6 +16,7 @@ export class MapScreenComponent implements OnInit{
     import('leaflet').then(L => {
       this.initMap(L,);
     });  
+    this.callForData.emit();
   }
   private initMap(L: typeof import('leaflet'), ): void {
     this.map = L.map('map', {
