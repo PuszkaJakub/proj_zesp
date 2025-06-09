@@ -1,2 +1,8 @@
 <!-- <app-start-screen></app-start-screen> -->
-<app-map-screen (callForData)="fetchData()" (addNewData)="sendData($event)" [placeList]="placeListInfo"></app-map-screen>
+@if(screen === 'map-screen'){
+<app-map-screen (callScreenChange)="screenChange($event)" (callForData)="fetchData()" (addNewData)="sendData($event)"
+    [placeList]="placeListInfo"></app-map-screen>
+}
+@else if(screen === 'add-place'){
+<app-add-place (callScreenChange)="screenChange($event)"></app-add-place>
+}

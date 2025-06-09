@@ -3,9 +3,10 @@
         <h1>Aplikacja dla turystów</h1>
     </div>
 
+    <app-map></app-map>
+    <button class="add-new-place-button" (click)="sendAddPlaceRequest()">+ Dodaj miejsce</button>
     <div class="content">
         <div class="info-container">
-            @if(!addNewPlace){
             <h2>Poznaj nowe miejsca</h2>
             <blockquote class="places-container">
                 <ul class="places">
@@ -28,46 +29,9 @@
                     }
                 </ul>
             </blockquote>
-            }
-            @else{
-            <div class="add-place-container">
-                <h2 class="title">Dodaj nowe miejsce</h2>
-                <div class="add-place-form row">
-                    <div class="form-field col x-50">
-                        <select class="input-text" name="type" id="type" required (select)="onTypeSelectChange($event)">
-                            <option value="atrakcja">Atrakcja</option>
-                            <option value="widok">Widok</option>
-                            <option value="zabytek">Zabytek</option>
-                        </select>
-                        <label class="label" for="type">Rodzaj miejsca</label>
-                    </div>
-                    <div class="form-field col x-50">
-                        <input id="name" class="input-text js-input" type="text" required (input)="onTitleInputChange($event)" >
-                        <label class="label" for="title">Nazwa</label>
-                    </div>
-                    <div class="form-field col x-100">
-                        <input id="message" class="input-text js-input" type="text" required (input)="onDescriptionInputChange($event)">
-                        <label class="label" for="description">Opis</label>
-                    </div>
-                    <div class="form-field col x-100 align-center">
-                        <button class="submit-btn" (click)="addPlaceSendForm()">Dodaj</button>
-                    </div>
-                </div>
-            </div>
-            }
 
 
 
         </div>
-        <div class="map-container">
-            <div class="map-frame">
-                <div id="map">
-
-                </div>
-                <button class="add-new-place-button" (click)="addPlaceInterface()">+ Dodaj miejsce</button>
-            </div>
-        </div>
-
-
     </div>
 </div>
