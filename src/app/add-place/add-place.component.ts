@@ -55,4 +55,8 @@ export class AddPlaceComponent {
     // );
     this.callScreenChange.emit('map-screen');
   }
+
+  cancelAddPlace() {
+    this.callScreenChange.emit('map-screen');
+  }
 }

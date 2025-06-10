@@ -15,67 +15,39 @@ import {
 } from '@angular/forms';
 import * as L from 'leaflet';
 import { MapComponent } from '../map/map.component';
-
-class Place {
-  id: number;
-  type: string;
-  title: string;
-  description: string;
-  coords: [number, number];
-  rate: number;
-
-  constructor(
-    id: number,
-    type: string,
-    title: string,
-    description: string,
-    coords: [number, number],
-    rate: number
-  ) {
-    this.id = id;
-    this.type = type;
-    this.title = title;
-    this.description = description;
-    this.coords = coords;
-    this.rate = rate;
-  }
-}
+import { IPlace } from '../../model/class-templates';
+import { PlaceInfoComponent } from '../place-info/place-info.component';
 
 @Component({
   selector: 'app-map-screen',
-  imports: [ReactiveFormsModule, MapComponent],
+  imports: [ReactiveFormsModule, MapComponent, PlaceInfoComponent],
   templateUrl: './map-screen.component.html',
   styleUrl: './map-screen.component.scss',
 })
 export class MapScreenComponent implements OnInit {
-  @Output() callForData = new EventEmitter();
-  @Output() callScreenChange = new EventEmitter();
-  @Output() addNewData = new EventEmitter<Place>();
-
-  private _placeList: Place[] = [];
-  public get placeList(): Place[] {
+  private _placeList: IPlace[] = [];
+  public get placeList(): IPlace[] {
     return this._placeList;
   }
   @Input()
   public set placeList(response: any) {
-    this._placeList = response.map(
-      (item: any) =>
-        new Place(
-          item.id,
-          item.type,
-          item.title,
-          item.description,
-          [item.y, item.x],
-          item.average_rate
-        )
-    );
+    this._placeList = response.map((item: any) => ({
+      id: item.id,
+      type: item.type,
+      title: item.title,
+      description: item.description,
+      coords: [item.y, item.x],
+      rate: item.average_rate,
+    }));
   }
 
-  
-  constructor() {
-    
-  }
+  @Output() callForData = new EventEmitter();
+  @Output() callScreenChange = new EventEmitter<string>();
+  @Output() callShowPlace = new EventEmitter<IPlace>();
+  @Output() addNewData = new EventEmitter<IPlace>();
+
   @ViewChild(MapComponent) MapComponent!: MapComponent;
+  @ViewChild(PlaceInfoComponent) PlaceInfoComponent!: PlaceInfoComponent;
 
   // Formularz do dodania nowego miejsca
   addNewPlaceForm = new FormGroup({
@@ -84,29 +56,43 @@ export class MapScreenComponent implements OnInit {
     description: new FormControl('', [Validators.required]),
   });
 
-  sendAddPlaceRequest(){
-    this.callScreenChange.emit('add-place');
+  ngOnInit() {
+    this.callForData.emit();
+    this.placeList.push({
+      id: 1,
+      type: 'atrakcja',
+      title: 'Zamek Królewski',
+      description:
+        'Zamek Królewski w Warszawie to historyczna rezydencja królewska, która pełniła funkcję siedziby polskich monarchów.',
+      coords: [52.24783441469336, 21.015265689037438],
+      rate: 4.5,
+    });
   }
 
 
+
+  sendShowPlaceRequest(place: IPlace) {
+    this.callScreenChange.emit('place-screen');
+    this.callShowPlace.emit(place);
+    console.log('Wybrano miejsce:', place);
+    console.log('Ala ma kota');
+  }
+
+  sendAddPlaceRequest() {
+    this.callScreenChange.emit('add-place');
+  }
 
   addNewPlace = false;
   newPlacePosition: [number, number] = [0, 0];
 
-  ngOnInit() {
-    this.callForData.emit();
+  sendShowPlaceInfoRequest(coords: [number, number], place: IPlace) {
+    setTimeout(() => {
+      this.MapComponent.centerMap(coords);
+    }, 100);
+
+    this.PlaceInfoComponent.loadPlaceInfo(place);
 
   }
-
-  centerMap(coords: [number, number]) {
-    // this.map.setView(coords);
-    // this.map.setZoom(20);
-    // this.map.removeLayer(this.marker);
-    // this.marker = L.marker(coords).addTo(this.map);
-    // this.marker.bindPopup('To tutaj!').openPopup();
-  }
-
-
 
   addPlaceSendForm() {
     this.addNewPlace = false;
@@ -121,5 +107,4 @@ export class MapScreenComponent implements OnInit {
     //   )
     // );
   }
-
 }

@@ -11,9 +11,8 @@
             <blockquote class="places-container">
                 <ul class="places">
                     @for(place of placeList; track place.id){
-                    <li class="place-item" (click)="centerMap(place.coords)">
+                    <li class="place-item" (click)="sendShowPlaceInfoRequest(place.coords, place)">
                         <p class="place-item--name"><i class="fa-solid fa-location-dot"></i> {{place.title}}</p>
-                        <p class="place-item--info">{{place.description}}</p>
                         <p class="place-item--review">
                             @for(number of [0,1,2,3,4]; track $index){
                             @if(place.rate > $index){
@@ -25,6 +24,7 @@
                             }
                             }
                         </p>
+                        <button (click)="sendShowPlaceRequest(place)">Więcej</button>
                     </li>
                     }
                 </ul>
@@ -32,6 +32,9 @@
 
 
 
+        </div>
+        <div class="info-container">
+            <app-place-info></app-place-info>
         </div>
     </div>
 </div>

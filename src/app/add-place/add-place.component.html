@@ -1,5 +1,6 @@
-<p>add-place works!</p>
+<button (click)="cancelAddPlace()">Anuluj</button>
 @if(!placeChosen){
+
 <app-map (addPlaceUpdate)="updatePlaceCoords($event)"></app-map>
 <button class="" [disabled]="!newPlacePosition[0] && !newPlacePosition[1]" (click)="placeChosen = true">Dalej</button>
 

@@ -1,0 +1,17 @@
+<div>
+    @if(place){
+    <p class="place-item--name"><i class="fa-solid fa-location-dot"></i> {{place.title}}</p>
+    <p class="place-item--info">{{place.description}}</p>
+    <p class="place-item--review">
+        @for(number of [0,1,2,3,4]; track $index){
+        @if(place.rate > $index){
+        <i class="fa-solid fa-star"></i>
+        }
+        @else{
+        <i class="fa-regular fa-star"></i>
+
+        }
+        }
+    </p>
+    }
+</div>

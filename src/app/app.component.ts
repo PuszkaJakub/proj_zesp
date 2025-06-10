@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { MapScreenComponent } from './map-screen/map-screen.component';
 import { TouristApiService } from './tourist-api.service';
 import { AddPlaceComponent } from './add-place/add-place.component';
+import { IPlace } from '../model/class-templates';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,10 @@ export class AppComponent {
 
   screenChange(screen: string) {
     this.screen = screen;
+  }
+
+  showPlace(place: IPlace){
+
   }
 
 

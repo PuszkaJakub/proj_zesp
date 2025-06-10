@@ -22,7 +22,6 @@ export class MapComponent {
 
   @Output() addPlaceUpdate = new EventEmitter<[number, number]>();
 
-
   private initMap(): void {
     this.map = L.map('map', {
       center: [52.06, 19.25],
@@ -36,7 +35,7 @@ export class MapComponent {
   }
 
   addPlaceInterface() {
-    if(this.map){
+    if (this.map) {
       this.addNewPlace = true;
       this.map.on('click', (e: any) => {
         this.addPlaceUpdatePostion(e.latlng);
@@ -55,13 +54,12 @@ export class MapComponent {
     this.addPlaceUpdate.emit(this.newPlacePosition);
   }
 
-
   centerMap(coords: [number, number]) {
-    // this.map.setView(coords);
-    // this.map.setZoom(20);
-    // this.map.removeLayer(this.marker);
-    // this.marker = L.marker(coords).addTo(this.map);
-    // this.marker.bindPopup('To tutaj!').openPopup();
+    this.map.invalidateSize();
+    this.map.setView(coords);
+    this.map.setZoom(17);
+    this.map.removeLayer(this.marker);
+    this.marker = L.marker(coords).addTo(this.map);
+    this.marker.bindPopup('To tutaj!').openPopup();
   }
-
 }
