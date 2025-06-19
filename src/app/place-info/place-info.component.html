@@ -1,17 +1,21 @@
-<div>
+<div class="place-item">
     @if(place){
-    <p class="place-item--name"><i class="fa-solid fa-location-dot"></i> {{place.title}}</p>
-    <p class="place-item--info">{{place.description}}</p>
-    <p class="place-item--review">
-        @for(number of [0,1,2,3,4]; track $index){
-        @if(place.rate > $index){
-        <i class="fa-solid fa-star"></i>
-        }
-        @else{
-        <i class="fa-regular fa-star"></i>
+    <h2 class="place-item__name">{{place.title}}</h2>
+    <p class="place-item__type">Rodzaj: {{place.type}}</p>
+    <p class="place-item__info">{{place.description}}</p>
 
-        }
-        }
-    </p>
+    <form action="">
+            <div class="place-item__inputbox">
+                <label class="label" for="title">Imię</label>
+                <input type="text" placeholder="Wprowadź swoje imię" formControlName="title"
+                    class="place-item__input">
+            </div>
+            <div class="place-item__inputbox">
+                <label class="label" for="description">Opis</label>
+                <textarea type="text" placeholder="Wprowadź treść komentarza" cols="30" rows="10" formControlName="description"
+                    class="place-item__input"></textarea>
+            </div>
+            <button class="place-item__button" type="submit" >Dodaj komentarz</button>
+    </form>
     }
 </div>

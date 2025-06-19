@@ -1,0 +1,60 @@
+.place-item {
+  height: 100%;
+
+  &__name{
+    text-align: center;
+    padding: 2rem;
+    text-transform: uppercase;
+  }
+
+  &__info{
+    margin-bottom: 2rem;
+  }
+
+  &__inputbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 50%;
+  }
+
+  &__input {
+    margin: 0rem 1rem 1rem;
+    padding: 0.5rem;
+    min-width: 50%;
+    max-width: 100%;
+
+    border-radius: 16px;
+    border: 2px solid var(--dark-green1);
+    color: var(--black);
+    background-color: var(--mint3);
+
+    option {
+      color: var(--black);
+    }
+  }
+
+  label {
+    text-align: center;
+    color: var(--black);
+  }
+
+  &__button {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 2px solid var(--dark-green1);
+    color: var(--white);
+    background-color: transparent;
+    transition: background-color 0.3s;
+  }
+
+    &__button:hover {
+        background-color: var(--dark-green1);
+        color: var(--mint1);
+    }
+
+}

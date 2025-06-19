@@ -3,16 +3,18 @@
   justify-self: center;
   align-self: center;
   width: 90%;
-  margin: 1rem 1rem 1rem 0rem;
+  margin: 1rem;
 }
 
 .map-frame {
   position: relative;
   border: 2px solid black;
+  border-radius: 20px;
   height: 50%;
 }
 
 
 #map {
   height: 50vh;
+  border-radius: 20px;
 }

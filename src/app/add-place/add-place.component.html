@@ -1,29 +1,44 @@
-<button (click)="cancelAddPlace()">Anuluj</button>
-@if(!placeChosen){
+<div class="content">
 
-<app-map (addPlaceUpdate)="updatePlaceCoords($event)"></app-map>
-<button class="" [disabled]="!newPlacePosition[0] && !newPlacePosition[1]" (click)="placeChosen = true">Dalej</button>
+    <form [formGroup]="addNewPlaceForm" (submit)="addNewPlaceSubmit()">
+        <div class="bar">
+            <button class="bar__button" (click)="cancelAddPlace()">Anuluj</button>
+            <h1 class="bar__title">Dodaj nowe miejsce</h1>
+        </div>
 
-}
-@else{
-<h2 class="title">Dodaj nowe miejsce</h2>
-<form [formGroup]="addNewPlaceForm" (submit)="addNewPlaceSubmit()">
 
-    <select class="input-text" formControlName="type" id="type">
-        <option value="atrakcja">Atrakcja</option>
-        <option value="widok">Widok</option>
-        <option value="zabytek">Zabytek</option>
-    </select>
-    <label class="label" for="type">Rodzaj miejsca</label>
+        <h2 class="section__title">Wybierz miejsce na mapie</h2>
+        <app-map (addPlaceUpdate)="updatePlaceCoords($event)"></app-map>
+        <div class="section">
+            @if(placeChosen){
+            <h2 class="section__title">Uzupełnij dane</h2>
 
-    <input type="text" placeholder="Wprowadź nazwę nowego miejsca" formControlName="title" class="section__input">
-    <label class="label" for="title">Nazwa</label>
 
-    <input type="text" placeholder="Opisz, czym charakteryzuje się to miejsce" formControlName="description"
-        class="section__input">
-    <label class="label" for="description">Opis</label>
+            <div class="section__inputbox">
+                <label class="label" for="type">Rodzaj miejsca</label>
+                <select class="section__input" formControlName="type" id="type">
+                    <option value="atrakcja">Atrakcja</option>
+                    <option value="widok">Widok</option>
+                    <option value="zabytek">Zabytek</option>
+                </select>
+            </div>
+            <div class="section__inputbox">
+                <label class="label" for="title">Nazwa</label>
+                <input type="text" placeholder="Wprowadź nazwę nowego miejsca" formControlName="title"
+                    class="section__input">
+            </div>
+            <div class="section__inputbox">
+                <label class="label" for="description">Opis</label>
+                <textarea type="text" placeholder="Opisz, czym charakteryzuje się to miejsce" cols="30" rows="10" formControlName="description"
+                    class="section__input"></textarea>
+            </div>
+            @if(addNewPlaceForm.valid){
+            <button class="section__button" type="submit" [disabled]="addNewPlaceForm.invalid">Dodaj</button>
 
-    <button type="submit" [disabled]="addNewPlaceForm.invalid">Dodaj</button>
+            }
+            }
+        </div>
+    </form>
 
-</form>
-}
+
+</div>

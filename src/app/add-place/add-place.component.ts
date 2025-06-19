@@ -33,6 +33,9 @@ export class AddPlaceComponent {
   }
 
   updatePlaceCoords(position: [number, number]) {
+    if(!this.placeChosen){
+      this.placeChosen = true;
+    }
     this.newPlacePosition = position;
     console.log('Nowa pozycja:', this.newPlacePosition);
   }

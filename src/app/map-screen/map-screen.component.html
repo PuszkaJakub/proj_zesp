@@ -3,38 +3,24 @@
         <h1>Aplikacja dla turystów</h1>
     </div>
 
-    <app-map></app-map>
-    <button class="add-new-place-button" (click)="sendAddPlaceRequest()">+ Dodaj miejsce</button>
+    <app-map (callMapMoved)="sortPlaceList($event)" (callPlaceInfo)="findPlace($event)"></app-map>
     <div class="content">
-        <div class="info-container">
-            <h2>Poznaj nowe miejsca</h2>
-            <blockquote class="places-container">
-                <ul class="places">
-                    @for(place of placeList; track place.id){
-                    <li class="place-item" (click)="sendShowPlaceInfoRequest(place.coords, place)">
-                        <p class="place-item--name"><i class="fa-solid fa-location-dot"></i> {{place.title}}</p>
-                        <p class="place-item--review">
-                            @for(number of [0,1,2,3,4]; track $index){
-                            @if(place.rate > $index){
-                            <i class="fa-solid fa-star"></i>
-                            }
-                            @else{
-                            <i class="fa-regular fa-star"></i>
-
-                            }
-                            }
-                        </p>
-                        <button (click)="sendShowPlaceRequest(place)">Więcej</button>
-                    </li>
-                    }
-                </ul>
-            </blockquote>
-
-
-
+        <div class="container">
+            <h2 class="places__title">Poznaj nowe miejsca</h2>
+            <button class="place__button place__button--addplace" (click)="sendAddPlaceRequest()">+ Dodaj miejsce</button>
+            <ul class="places__list">
+                @for(place of placeList; track place.id){
+                <li class="place__item" (click)="sendShowPlaceInfoRequest(place.coords, place)">
+                    <h3 class="place__title"><i class="fa-solid fa-location-dot"></i> {{place.title}}</h3>
+                    <p class="place__type">{{place.type}}</p>
+                    <p class="place__num">Ilość komentarzy: 0</p>
+                    <button class="place__button" (click)="sendShowPlaceRequest(place)">Więcej</button>
+                </li>
+                }
+            </ul>
         </div>
-        <div class="info-container">
-            <app-place-info></app-place-info>
-        </div>
+
+        <app-place-info class="container"></app-place-info>
+
     </div>
 </div>

@@ -16,7 +16,7 @@ export class AppComponent {
   title = "kamperyNG"
   constructor(private touristApi: TouristApiService) {}
   placeListInfo: any=[];
-  screen = 'map-screen'
+  screen = 'map-screen';
 
   fetchData() {
     this.touristApi.getPins().subscribe((response) =>{
