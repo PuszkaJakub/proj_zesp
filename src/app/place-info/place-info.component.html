@@ -1,21 +1,32 @@
 <div class="place-item">
     @if(place){
     <h2 class="place-item__name">{{place.title}}</h2>
-    <p class="place-item__type">Rodzaj: {{place.type}}</p>
     <p class="place-item__info">{{place.description}}</p>
 
-    <form action="">
-            <div class="place-item__inputbox">
-                <label class="label" for="title">Imię</label>
-                <input type="text" placeholder="Wprowadź swoje imię" formControlName="title"
-                    class="place-item__input">
-            </div>
-            <div class="place-item__inputbox">
-                <label class="label" for="description">Opis</label>
-                <textarea type="text" placeholder="Wprowadź treść komentarza" cols="30" rows="10" formControlName="description"
-                    class="place-item__input"></textarea>
-            </div>
-            <button class="place-item__button" type="submit" >Dodaj komentarz</button>
+    <h3 class="place-item__name">Komentarze</h3>
+    <ul class="place-item__comments">
+        @for(comment of comments; track comment.date){
+        <li class="place-item__comment">
+            <h3 class="place-item__comment-title">{{comment.author}}</h3>
+            <p class="place-item__comment-date">{{comment.date}}</p>
+            <p class="place-item__comment-content">{{comment.content}}</p>
+        </li>
+        }
+    </ul>
+    <form class="place-item__addcomment" action="">
+        <div class="place-item__inputbox">
+            <label class="label" for="title">Imię</label>
+            <input type="text" placeholder="Wprowadź swoje imię" formControlName="title" class="place-item__input">
+        </div>
+        <div class="place-item__inputbox">
+            <label class="label" for="description">Opis</label>
+            <textarea type="text" placeholder="Wprowadź treść komentarza" cols="30" rows="10"
+                formControlName="description" class="place-item__input"></textarea>
+        </div>
+        <div class="place-item__inputbox">
+            <button class="place-item__button" type="submit">Dodaj komentarz</button>
+
+        </div>
     </form>
     }
 </div>

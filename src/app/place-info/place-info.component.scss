@@ -57,4 +57,13 @@
         color: var(--mint1);
     }
 
+
+    &__comment{
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+
+    &__addcomment{
+      margin-top: 2rem;;
+    }
 }
