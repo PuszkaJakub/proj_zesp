@@ -15,8 +15,15 @@ export class TouristApiService {
   }
 
   public addPin(place: IPlace): Observable<any> {
-    
-    return this.httpClient.post(`${this.apiUrl}/add_pin`, place, {
+    const body = {
+      type: place.type,
+      title: place.title,
+      description: place.description,
+      x: place.coords[1],
+      y: place.coords[0],
+    };
+
+    return this.httpClient.post(`${this.apiUrl}/add_pin`, body, {
       headers: { 'Content-Type': 'application/json' },
     });
   }
