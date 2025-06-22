@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IPlace } from '../model/class-templates';
 
 @Injectable({
   providedIn: 'root',
@@ -13,16 +14,9 @@ export class TouristApiService {
     return this.httpClient.get('https://tourist.visoft.dev/get_pins');
   }
 
-  public addPin(place: any): Observable<any> {
-    const body = {
-      type: place.type,
-      title: place.title,
-      description: place.description,
-      x: place.coords[1],
-      y: place.coords[0],
-    };
-
-    return this.httpClient.post(`${this.apiUrl}/add_pin`, body, {
+  public addPin(place: IPlace): Observable<any> {
+    
+    return this.httpClient.post(`${this.apiUrl}/add_pin`, place, {
       headers: { 'Content-Type': 'application/json' },
     });
   }
