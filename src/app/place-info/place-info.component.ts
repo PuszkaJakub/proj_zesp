@@ -11,13 +11,13 @@ import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-place-info',
-  imports: [TouristApiService, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './place-info.component.html',
   styleUrl: './place-info.component.scss',
 })
 export class PlaceInfoComponent {
   place: IPlace | null = null;
-  comments: IComment[] = [];
+  comments: any = [];
 
   constructor(private touristApi: TouristApiService) {}
 
@@ -28,11 +28,12 @@ export class PlaceInfoComponent {
 
   loadPlaceInfo(place: IPlace) {
     this.place = place;
-    this.comments = [];
+    this.touristApi.getComments(place.id).subscribe((response) => {
+      this.comments = response;
+    });
   }
 
   addNewCommentSubmit() {
-    
     const now = new Date();
     const formatted =
       `${now.getDate().toString().padStart(2, '0')}.` +

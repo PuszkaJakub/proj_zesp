@@ -13,7 +13,7 @@
         </li>
         }
     </ul>
-    <form class="place-item__addcomment" (submit)="addNewCommentSubmit()">
+    <form class="place-item__addcomment" [formGroup]="addNewCommentForm" (submit)="addNewCommentSubmit()">
         <div class="place-item__inputbox">
             <label class="label" for="title">Imię</label>
             <input type="text" placeholder="Wprowadź swoje imię" formControlName="author" class="place-item__input">

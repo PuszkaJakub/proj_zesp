@@ -8,7 +8,7 @@ import { IPlace } from '../model/class-templates';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, StartScreenComponent, MapScreenComponent, AddPlaceComponent],
+  imports: [MapScreenComponent, AddPlaceComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -25,9 +25,7 @@ export class AppComponent {
   }
 
   sendData(place: any){
-    this.touristApi.addPin(place).subscribe((response) =>{
-      console.log(response);
-    });
+    this.touristApi.addPin(place)
   }
 
   screenChange(screen: string) {

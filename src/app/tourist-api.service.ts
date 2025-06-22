@@ -10,11 +10,11 @@ export class TouristApiService {
   constructor(private httpClient: HttpClient) {}
   private apiUrl = 'https://tourist.visoft.dev'; // Adres API
 
-  public getPins() {
-    return this.httpClient.get('https://tourist.visoft.dev/get_pins');
+  public getPins(): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/get_pins`);
   }
 
-  public addPin(place: IPlace): Observable<any> {
+  public addPin(place: IPlace) {
     const body = {
       type: place.type,
       title: place.title,
@@ -28,12 +28,25 @@ export class TouristApiService {
     });
   }
 
-  public getComments(id: number) {
-    return this.httpClient.get('https://tourist.visoft.dev/get_pins');
+  public getComments(id: number): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/get_comments/${id}`);
   }
 
+  // POST http://localhost:3000/add_comment     -H "Content-Type: application/json"     -d '{
+  //       "pin_id": 1,
+  //       "date": "2025-06-20T12:00:00Z",
+  //       "author": "Piotr",
+  //       "content": "Super widok!"
+  //   }'
   public addComment(comment: IComment) {
-    return this.httpClient.post(`${this.apiUrl}/add_comment`, comment, {
+    const body = {
+      pin_id: comment.pinId,
+      date: comment.date,
+      author: comment.author,
+      content: comment.content,
+    };
+
+    return this.httpClient.post(`${this.apiUrl}/add_comment`, body, {
       headers: { 'Content-Type': 'application/json' },
     });
   }

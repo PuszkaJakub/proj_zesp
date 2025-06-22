@@ -6,19 +6,19 @@
             <h1 class="bar__title">Dodaj nowe miejsce</h1>
         </div>
 
-
         <h2 class="section__title">Wybierz miejsce na mapie</h2>
         <app-map (addPlaceUpdate)="updatePlaceCoords($event)"></app-map>
+        @if(placeChosen){
         <div class="section">
-            @if(placeChosen){
             <h2 class="section__title">Uzupełnij dane</h2>
-
 
             <div class="section__inputbox">
                 <label class="label" for="type">Rodzaj miejsca</label>
                 <select class="section__input" formControlName="type" id="type">
                     <option value="atrakcja">Atrakcja</option>
+                    <option value="restauracja">Restauracja</option>
                     <option value="widok">Widok</option>
+                    <option value="wypoczynek">Wypoczynek</option>
                     <option value="zabytek">Zabytek</option>
                 </select>
             </div>
@@ -29,16 +29,13 @@
             </div>
             <div class="section__inputbox">
                 <label class="label" for="description">Opis</label>
-                <textarea type="text" placeholder="Opisz, czym charakteryzuje się to miejsce" cols="30" rows="10" formControlName="description"
-                    class="section__input"></textarea>
+                <textarea type="text" placeholder="Opisz, czym charakteryzuje się to miejsce" cols="30" rows="10"
+                    formControlName="description" class="section__input"></textarea>
             </div>
             @if(addNewPlaceForm.valid){
             <button class="section__button" type="submit" [disabled]="addNewPlaceForm.invalid">Dodaj</button>
-
-            }
             }
         </div>
+        }
     </form>
-
-
 </div>
