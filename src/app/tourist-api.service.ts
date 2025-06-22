@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IPlace } from '../model/class-templates';
+import { IComment, IPlace } from '../model/class-templates';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ export class TouristApiService {
   constructor(private httpClient: HttpClient) {}
   private apiUrl = 'https://tourist.visoft.dev'; // Adres API
 
-  public getPins(){
+  public getPins() {
     return this.httpClient.get('https://tourist.visoft.dev/get_pins');
   }
 
@@ -32,7 +32,9 @@ export class TouristApiService {
     return this.httpClient.get('https://tourist.visoft.dev/get_pins');
   }
 
-  public addComment() {
-    return this.httpClient.get('https://tourist.visoft.dev/get_pins');
+  public addComment(comment: IComment) {
+    return this.httpClient.post(`${this.apiUrl}/add_comment`, comment, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }

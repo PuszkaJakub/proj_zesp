@@ -10,7 +10,7 @@ export interface IPlace {
 }
 
 export interface IComment{
-  id: number;
+  pinId: number;
   date: string;
   author: string;
   content: string;

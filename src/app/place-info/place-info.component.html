@@ -13,15 +13,15 @@
         </li>
         }
     </ul>
-    <form class="place-item__addcomment" action="">
+    <form class="place-item__addcomment" (submit)="addNewCommentSubmit()">
         <div class="place-item__inputbox">
             <label class="label" for="title">Imię</label>
-            <input type="text" placeholder="Wprowadź swoje imię" formControlName="title" class="place-item__input">
+            <input type="text" placeholder="Wprowadź swoje imię" formControlName="author" class="place-item__input">
         </div>
         <div class="place-item__inputbox">
             <label class="label" for="description">Opis</label>
             <textarea type="text" placeholder="Wprowadź treść komentarza" cols="30" rows="10"
-                formControlName="description" class="place-item__input"></textarea>
+                formControlName="content" class="place-item__input"></textarea>
         </div>
         <div class="place-item__inputbox">
             <button class="place-item__button" type="submit">Dodaj komentarz</button>
