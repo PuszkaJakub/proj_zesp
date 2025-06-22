@@ -33,10 +33,4 @@ export class AppComponent {
   screenChange(screen: string) {
     this.screen = screen;
   }
-
-  showPlace(place: IPlace){
-
-  }
-
-
 }

@@ -15,6 +15,7 @@ import {
 })
 export class AddPlaceComponent {
   @ViewChild(MapComponent) MapComponent!: MapComponent;
+  @Output() addNewData = new EventEmitter();
   @Output() callScreenChange = new EventEmitter();
 
   newPlacePosition: [number, number] = [0, 0];
@@ -41,21 +42,16 @@ export class AddPlaceComponent {
   }
 
   addNewPlaceSubmit() {
-    console.log(this.addNewPlaceForm.get('type')?.value);
-    console.log(this.addNewPlaceForm.get('title')?.value);
-    console.log(this.addNewPlaceForm.get('description')?.value);
-    console.log(this.newPlacePosition);
-
-    // this.addNewData.emit(
-    //   new Place(
-    //     0,
-    //     this.newPlaceType,
-    //     this.newPlaceTitle,
-    //     this.newPlaceDescription,
-    //     this.newPlacePosition,
-    //     5
-    //   )
-    // );
+    this.addNewData.emit(
+      {
+        id: 0,
+        type: this.addNewPlaceForm.get('type')?.value,
+        title: this.addNewPlaceForm.get('title')?.value,
+        description: this.addNewPlaceForm.get('description')?.value,
+        coords: this.newPlacePosition,
+        commentsAmount: 0,
+      }
+    );
     this.callScreenChange.emit('map-screen');
   }
 

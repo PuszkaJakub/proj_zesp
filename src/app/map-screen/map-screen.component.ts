@@ -58,33 +58,6 @@ export class MapScreenComponent implements OnInit {
 
   ngOnInit() {
     this.callForData.emit();
-    this.placeList.push({
-      id: 1,
-      type: 'zabytek',
-      title: 'Zamek Królewski',
-      description:
-        'Zamek Królewski w Warszawie to historyczna rezydencja królewska, która pełniła funkcję siedziby polskich monarchów.',
-      coords: [52.24783441469336, 21.015265689037438],
-      rate: 4.5,
-    });
-    this.placeList.push({
-      id: 2,
-      type: 'atrakcja',
-      title: 'Wroclaw',
-      description:
-        'miasto na prawach powiatu w południowo-zachodniej Polsce, siedziba władz województwa dolnośląskiego i powiatu wrocławskiego. Położone w Europie Środkowej, na Nizinie Śląskiej, nad Odrą i czterema jej dopływami. Jest historyczną stolicą Dolnego Śląska, a także całego Śląska',
-      coords: [51.0636, 17.0120],
-      rate: 4.5,
-    });
-    this.placeList.push({
-      id: 3,
-      type: 'atrakcja',
-      title: 'Gdańsk',
-      description: 'miasto na prawach powiatu w północnej Polsce w województwie pomorskim, położone nad Morzem Bałtyckim u ujścia Motławy do Wisły nad Zatoką Gdańską, największe pod względem powierzchni miasto w kraju.',
-      coords: [54.31, 18.60],
-      rate: 4.5,
-    });
-
     
     setTimeout(() => {
       this.MapComponent.addMarkers(this.placeList);

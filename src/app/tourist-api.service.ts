@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +12,6 @@ export class TouristApiService {
   public getPins(){
     return this.httpClient.get('https://tourist.visoft.dev/get_pins');
   }
-
 
   public addPin(place: any): Observable<any> {
     const body = {
@@ -29,10 +27,11 @@ export class TouristApiService {
     });
   }
 
-  public getPin() {
+  public getComments(id: number) {
     return this.httpClient.get('https://tourist.visoft.dev/get_pins');
   }
-  public addRate() {
+
+  public addComment() {
     return this.httpClient.get('https://tourist.visoft.dev/get_pins');
   }
 }
