@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { IComment, IPlace } from '../model/class-templates';
 
@@ -8,13 +9,28 @@ import { IComment, IPlace } from '../model/class-templates';
 })
 export class TouristApiService {
   constructor(private httpClient: HttpClient) {}
-  private apiUrl = 'https://tourist.visoft.dev'; // Adres API
+  private apiUrl = 'http://localhost:3000'; // Adres API
 
-  public getPins(): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/get_pins`);
-  }
 
-  public addPin(place: IPlace) {
+
+public getPins(): Observable<any> {
+  return this.httpClient.get<any[]>(`${this.apiUrl}/get_pins`).pipe(
+    map((response: any[]) =>
+      response.map(item => ({
+        id: item.id,
+        type: item.type,
+        title: item.title,
+        description: item.description,
+        coords: [item.y, item.x],
+        commentsAmount: item.comments_count,
+      }))
+    )
+  );
+
+  
+}
+
+  public addPin(place: IPlace): Observable<any> {
     const body = {
       type: place.type,
       title: place.title,

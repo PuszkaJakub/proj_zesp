@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Londrina+Sketch&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root {
+	--background: #f2f6f7;
+	--item: #99d9cd;
+	--button: #b5c7c4;
+	--button-hover: #b5c7c4;
+	--button-add: #10977e;
+	--nav: #4287f5;
+
+
 	--mint1: #D8F3DC;
 	--mint2: #B7E4C7;
 	--mint3: #95D5B2;
@@ -18,4 +26,13 @@
 	font-family: 'Inter', sans-serif;
 }
 
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #daeaee;
+
+}
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import * as L from 'leaflet';
 import { IPlace } from '../../model/class-templates';
 
@@ -17,6 +17,7 @@ export class MapComponent {
 
   private map: any;
   private marker = L.marker([52.06, 19.25]);
+  private markers: L.Marker[] = [];
 
   addNewPlace = false;
   newPlacePosition: [number, number] = [0, 0];
@@ -68,6 +69,23 @@ export class MapComponent {
     }
   }
 
+  private _places: IPlace[] | null = null;
+
+  public get places(): IPlace[] | null {
+    return this._places;
+  }
+
+  @Input()
+  public set places(value: IPlace[] | null) {
+    this._places = value;
+    setTimeout(() => {
+      this.addMarkers(this._places!);
+      this.centerMap(this._places![0].coords)
+
+    }, 200);
+
+  }
+
   @Output() addPlaceUpdate = new EventEmitter<[number, number]>();
   @Output() callMapMoved = new EventEmitter<L.LatLng>();
   @Output() callPlaceInfo = new EventEmitter<L.LatLng>();
@@ -109,21 +127,28 @@ export class MapComponent {
   }
 
   addMarkers(places: IPlace[]) {
+    console.log(places);
+    if (!this.map) {
+      console.error('Mapa nie została zainicjalizowana.');
+      return;
+    }
+    this.markers.forEach((marker) => this.map.removeLayer(marker));
+    this.markers = [];
     places.forEach((place) => {
       const icon = this.getIconByType(place.type);
-      const marker = L.marker(place.coords, { icon: icon }).addTo(
-        this.map
-      );
-      marker.bindPopup(place.title).openPopup();
-      marker.on('click', () => {
-        this.callPlaceInfo.emit(marker.getLatLng());
+      const newMarker = L.marker(place.coords, { icon: icon }).addTo(this.map);
+      console.log('Dodano marker:', newMarker);
+      newMarker.bindPopup(place.title).openPopup();
+      newMarker.on('click', () => {
+        this.callPlaceInfo.emit(newMarker.getLatLng());
       });
+      this.markers.push(newMarker);
     });
   }
 
   centerMap(coords: [number, number]) {
     this.map.invalidateSize();
-    this.map.setView(coords, 17);
+    this.map.setView(coords, 15);
     // this.map.setZoom(17);
     this.marker.bindPopup('To tutaj!').openPopup();
   }

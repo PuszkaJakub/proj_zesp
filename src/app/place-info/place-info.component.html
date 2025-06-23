@@ -1,32 +1,51 @@
-<div class="place-item">
-    @if(place){
-    <h2 class="place-item__name">{{place.title}}</h2>
-    <p class="place-item__info">{{place.description}}</p>
+@if(place){
+<div class="wrapper">
+    <div class="bar">
+        <button class="bar__button" (click)="exit()">Powrót</button>
+        <h1 class="bar__title">Szczegóły miejsca</h1>
+        <a href="https://www.google.com/maps?q={{place.coords[0]}},{{place.coords[1]}}" target="_blank"
+            class="bar__button--nav">Nawiguj</a>
+    </div>
+    <div class="content">
 
-    <h3 class="place-item__name">Komentarze</h3>
-    <ul class="place-item__comments">
-        @for(comment of comments; track comment.date){
-        <li class="place-item__comment">
-            <h3 class="place-item__comment-title">{{comment.author}}</h3>
-            <p class="place-item__comment-date">{{comment.date}}</p>
-            <p class="place-item__comment-content">{{comment.content}}</p>
-        </li>
-        }
-    </ul>
-    <form class="place-item__addcomment" [formGroup]="addNewCommentForm" (submit)="addNewCommentSubmit()">
-        <div class="place-item__inputbox">
-            <label class="label" for="title">Imię</label>
-            <input type="text" placeholder="Wprowadź swoje imię" formControlName="author" class="place-item__input">
-        </div>
-        <div class="place-item__inputbox">
-            <label class="label" for="description">Opis</label>
-            <textarea type="text" placeholder="Wprowadź treść komentarza" cols="30" rows="10"
-                formControlName="content" class="place-item__input"></textarea>
-        </div>
-        <div class="place-item__inputbox">
-            <button class="place-item__button" type="submit">Dodaj komentarz</button>
+        <div class="place-item place-item--info">
+
+            <h2 class="place-item__name">{{place.title}}</h2>
+            <p class="place-item__info">{{place.description}}</p>
+
+
+
+            <form class="place-item__addcomment" [formGroup]="addNewCommentForm" (submit)="addNewCommentSubmit()">
+                <div class="place-item__inputbox">
+                    <label class="label" for="title">Imię</label>
+                    <input type="text" placeholder="Wprowadź swoje imię" formControlName="author"
+                        class="place-item__input">
+                </div>
+                <div class="place-item__inputbox">
+                    <label class="label" for="description">Opis</label>
+                    <textarea type="text" placeholder="Wprowadź treść komentarza" cols="70" rows="10"
+                        formControlName="content" class="place-item__input"></textarea>
+                </div>
+                <div class="place-item__inputbox">
+                    <button class="place-item__button" type="submit">Dodaj komentarz</button>
+
+                </div>
+            </form>
+            <h3 class="place-item__name">Komentarze</h3>
+
+            <ul class="place-item__comments">
+                @for(comment of comments; track comment.date){
+                <li class="place-item__comment">
+                    <h3 class="place-item__comment-title">{{comment.author}}</h3>
+                    <p class="place-item__comment-date">{{comment.date}}</p>
+                    <p class="place-item__comment-content">{{comment.content}}</p>
+                </li>
+                }
+            </ul>
 
         </div>
-    </form>
-    }
+
+        <app-map class="place-item section__map" [places]="[place]"></app-map>
+    </div>
 </div>
+}

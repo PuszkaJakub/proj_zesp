@@ -1,9 +1,14 @@
 .wrapper {
-  margin: 0 auto;
-  width: 100%;
-  height: 100vh;
-  max-width: 1800px;
-  background-color: var(--mint2);
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+  max-width: 2000px;
+  background-color: var(--background);
+  border-radius: 25px;
 
   button {
     cursor: pointer;
@@ -11,105 +16,150 @@
 }
 
 .content {
+  height: 95%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
-  align-items: flex-start;
-}
-
-.container {
-  width: 40%;
-  height: 100%;
-  padding: 2rem;
-  background-color: var(--green2);
-  border-radius: 20px;
+  align-items: center;
+  width: 50%;
+  padding: 0.2rem;
+  margin: 0.5rem;
 
   h2 {
+    font-size: 3rem;
     text-align: center;
     padding: 2rem;
     text-transform: uppercase;
   }
 }
 
-.place{
+.buttons-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
 
-  &__item{
-    padding: 1rem;
-    margin: 1rem;
-    text-align: center;
-    list-style: none;
-    border : 1px solid var(--dark-green1);
-    border-radius: 20px;
-    background-color: var(--mint3);  
+  &__button {
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    color: var(--black);
+    background-color: var(--button);
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--button) 85%, black);
+      cursor: pointer;
+    }
+  }
+}
+
+.places__list {
+  max-height: 70vh;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.place {
+  position: relative;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 25px;
+  background-color: var(--item);
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--item) 85%, black);
   }
 
-  &__title{
+  &__image {
+    position: absolute;
+    left: 5%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__item {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.2rem;
+    text-align: center;
+  }
+
+  &__title {
     margin-bottom: 0;
     padding: 1rem;
     color: var(--black);
     font-weight: bold;
 
-    i{
+    i {
       color: var(--dark-green2);
     }
   }
 
-  &__type{
+  &__type {
     margin: 0 0 1rem;
     color: var((--green3));
   }
 
-  &__num{
-    margin-bottom: 1rem;
+  &__num {
+    margin: 0 auto 1rem;
+    width: 60%;
   }
 
-  &__button{
-    font-size: 1rem;
+  &__button {
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
     border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    
+    cursor: pointer;
+    color: var(--black);
     background-color: transparent;
-    transition: color 0.3s;
 
-    &:hover{
-      color: var(--dark-green1);
-      cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--button) 85%, black);
     }
 
+    &--addplace {
+      color: var(--button-add);
+      font-size: 2rem;
 
+      &:hover {
+        color: color-mix(in srgb, var(--button-add) 85%, black);
+        background-color: color-mix(in srgb, var(--background) 85%, black);
+      }
+    }
+
+    &--more{
+      font-weight: bold;
+    }
   }
 }
-
 
 .places__container {
   // overflow: scroll;
   overflow-x: hidden;
 }
-
-
-
-
-.navigate {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 5vh;
-  background-color: var(--green3);
-  color: #000;
-  border-radius: 0px 0px 25px 25px;
-  h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 2rem;
-  }
-
-  button {
-    // position: absolute;
-    top: 0;
-    left: 50%;
-    align-self: flex-end;
-  }
-}
-

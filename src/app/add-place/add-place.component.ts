@@ -42,20 +42,24 @@ export class AddPlaceComponent {
   }
 
   addNewPlaceSubmit() {
-    this.addNewData.emit(
-      {
-        id: 0,
-        type: this.addNewPlaceForm.get('type')?.value,
-        title: this.addNewPlaceForm.get('title')?.value,
-        description: this.addNewPlaceForm.get('description')?.value,
-        coords: this.newPlacePosition,
-        commentsAmount: 0,
-      }
-    );
+    if(this.addNewPlaceForm.valid){
+      this.addNewData.emit(
+        {
+          id: 0,
+          type: this.addNewPlaceForm.get('type')?.value,
+          title: this.addNewPlaceForm.get('title')?.value,
+          description: this.addNewPlaceForm.get('description')?.value,
+          coords: this.newPlacePosition,
+          commentsAmount: 0,
+        }
+      );
+      this.addNewPlaceForm.reset();
+    }
     this.callScreenChange.emit('map-screen');
   }
 
   cancelAddPlace() {
+    this.addNewPlaceForm.reset();
     this.callScreenChange.emit('map-screen');
   }
 }

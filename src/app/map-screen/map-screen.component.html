@@ -1,26 +1,42 @@
 <div class="wrapper">
-    <div class="navigate">
+    <!-- <div class="navigate">
         <h1>Aplikacja dla turystów</h1>
-    </div>
+    </div> -->
 
-    <app-map (callMapMoved)="sortPlaceList($event)" (callPlaceInfo)="findPlace($event)"></app-map>
+
     <div class="content">
-        <div class="container">
-            <h2 class="places__title">Poznaj nowe miejsca</h2>
-            <button class="place__button place__button--addplace" (click)="sendAddPlaceRequest()">+ Dodaj miejsce</button>
-            <ul class="places__list">
-                @for(place of placeList; track place.id){
-                <li class="place__item" (click)="sendShowPlaceInfoRequest(place.coords, place)">
-                    <h3 class="place__title"><i class="fa-solid fa-location-dot"></i> {{place.title}}</h3>
-                    <p class="place__type">{{place.type}}</p>
-                    <p class="place__num">Ilość komentarzy: 0</p>
-                    <button class="place__button" (click)="sendShowPlaceRequest(place)">Więcej</button>
-                </li>
-                }
-            </ul>
+        <h2 class="places__title">Poznaj nowe miejsca</h2>
+        <button class="place__button place__button--addplace" (click)="sendChangeScreenRequest('add-place')">+ Dodaj nowe
+            miejsce</button>
+        <div class="buttons-bar">
+            <button class="buttons-bar__button">atrakcje</button>
+            <button class="buttons-bar__button">restauracje</button>
+            <button class="buttons-bar__button">widoki</button>
+            <button class="buttons-bar__button">wypoczynek</button>
+            <button class="buttons-bar__button">zabytki</button>
         </div>
 
-        <app-place-info class="container"></app-place-info>
+        <ul class="places__list">
+            @for(place of placeList; track place.id){
+            <li class="place" (click)="sendShowPlaceInfoRequest(place.coords, place)">
+                <img class="place__image" [src]="'/img/' + place.type + '.svg'" alt="{{place.title}}">
+                <div class="place__item">
+                    <h3 class="place__title"><i class="fa-solid fa-location-dot"></i> {{place.title}}</h3>
+                    <p class="place__type">{{place.type}}</p>
 
+                    <p class="place__num">{{getPlaceDescShort(place.description)}}</p>
+                    <button class="place__button place__button--more"
+                        (click)="callLoadPlaceInfoRequest( place); sendChangeScreenRequest('place-info')">Więcej</button>
+                </div>
+            </li>
+            }
+        </ul>
     </div>
+    
+    <!-- @if(showMore){
+
+        <app-place-info class="container"></app-place-info>
+    } -->
+    <app-map class="content" (callMapMoved)="sortPlaceList($event)" (callPlaceInfo)="findPlace($event)"></app-map>
+
 </div>

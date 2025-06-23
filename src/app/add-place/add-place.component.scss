@@ -1,20 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 100vw;
+  // max-height: 100vh;
+  max-width: 2000px;
+  background-color: var(--background);
+  border-radius: 25px;
+
+  button {
+    cursor: pointer;
+  }
+  // padding: 1rem;
+}
+
 .content {
-  margin: 0 auto;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  min-width: 80%;
   max-width: 1800px;
-  margin-bottom: 3rem;
+  margin: 3rem;
 }
 
 .bar {
   position: relative;
+  margin-bottom: 1rem;
   padding: 1rem 2rem;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 0px 0px 25px 25px;
-  background-color: var(--green3);
+  background-color: var(--item);
 
   &__button {
     position: absolute;
@@ -32,7 +51,21 @@
   }
 }
 
+.section__map {
+  
+  .map-container {
+    height: 40vh;
+    width: 100%;
+    
+  }
+}
+
 .section {
+  #map {
+    height: 100%;
+    width: 100%;
+    min-height: 50vh; 
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,13 +73,14 @@
   margin: 2rem;
   padding: 1rem 0;
   border-radius: 25px;
-  background-color: var(--mint3);
+  background-color: color-mix(in srgb, var(--background) 98%, black);
+
 
   &__title {
     padding: 1rem 1rem 0rem;
     margin-bottom: 2rem;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   &__inputbox {
     display: flex;
@@ -63,7 +97,7 @@
     max-width: 80%;
     border-radius: 16px;
     background-color: transparent;
-    border: 3px solid var(--dark-green1);
+    border: 3px solid var(--button-add);
     color: var(--black);
 
     option {
@@ -81,7 +115,7 @@
     border-radius: 20px;
     text-align: center;
     background-color: transparent;
-    border: 3px solid var(--dark-green1);
+    border: 3px solid var(--button-add);
     font-size: 1.5rem;
     color: var(--white);
     transition: background-color 0.3s;
@@ -90,14 +124,14 @@
     &:disabled,
     &[disabled] {
       cursor: not-allowed;
-      opacity: 0.6; // Optional: visual feedback
-      pointer-events: none; // Prevent any mouse interaction
+      opacity: 0.6;
+      pointer-events: none; 
     }
 
     &:not(:disabled):hover,
     &:not([disabled]):hover {
-      background-color: var(--dark-green1);
-      color: var(--mint1);
+      background-color: var(--button-add);
+      color: var(--white);
     }
   }
 }

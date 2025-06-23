@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { IPlace, IComment } from '../../model/class-templates';
 import { TouristApiService } from '../tourist-api.service';
 import {
@@ -8,29 +14,50 @@ import {
   Validators,
 } from '@angular/forms';
 import { timestamp } from 'rxjs';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-place-info',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MapComponent],
   templateUrl: './place-info.component.html',
   styleUrl: './place-info.component.scss',
 })
 export class PlaceInfoComponent {
-  place: IPlace | null = null;
+  private _place: IPlace | null = null;
+
+  public get place(): IPlace | null {
+    return this._place;
+  }
+
+  @Input()
+  public set place(value: IPlace | null) {
+    this._place = value;
+    if (this._place) {
+      this.touristApi.getComments(this._place.id).subscribe((response) => {
+        this.comments = response;
+      });
+    }
+  }
+
   comments: any = [];
 
-  constructor(private touristApi: TouristApiService) {}
+  @Output() callRefresh = new EventEmitter();
+  @Output() callScreenChange = new EventEmitter();
+
+  @ViewChild(MapComponent) MapComponent!: MapComponent;
+
+  constructor(private touristApi: TouristApiService) {console.log("krowa")
+  }
 
   addNewCommentForm = new FormGroup({
     author: new FormControl('', [Validators.required]),
     content: new FormControl('', [Validators.required]),
   });
 
-  loadPlaceInfo(place: IPlace) {
-    this.place = place;
-    this.touristApi.getComments(place.id).subscribe((response) => {
-      this.comments = response;
-    });
+  loadPlaceInfo() {
+    console.log('dupa');
+    this.MapComponent.addMarkers([this._place!]);
+    this.MapComponent.centerMap(this.place!.coords);
   }
 
   addNewCommentSubmit() {
@@ -51,7 +78,14 @@ export class PlaceInfoComponent {
         author: author,
         content: content,
       };
-      this.touristApi.addComment(newComment);
+      this.touristApi.addComment(newComment).subscribe((response) => {
+        this.addNewCommentForm.reset();
+        this.loadPlaceInfo();
+      });
     }
+  }
+
+  exit() {
+    this.callScreenChange.emit('map-screen');
   }
 }

@@ -1,13 +1,122 @@
-.place-item {
-  height: 100%;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 
-  &__name{
+  width: 100vw;
+  height: 100vh;
+  // max-height: 100vh;
+  max-width: 2000px;
+  background-color: var(--background);
+  border-radius: 25px;
+
+  button {
+    cursor: pointer;
+  }
+  // padding: 1rem;
+}
+
+.map-container {
+  position: relative;
+  height: 50vh;
+  width: 100%;
+}
+#map {
+  // height: 50vh;
+  width: 100%;
+  min-height: 50vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  min-width: 80%;
+  max-width: 1800px;
+  margin: 0 3rem;
+}
+
+.bar {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 0px 25px 25px;
+  background-color: var(--item);
+
+  &__button {
+    position: absolute;
+    left: 5%;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: transparent;
+
+    &--nav {
+      position: absolute;
+      right: 5%;
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background-color 0.3s;
+      background-color: var(--nav);
+
+      &:visited {
+        color: inherit;
+      }
+      &:hover {
+        background-color: color-mix(in srgb, var(--nav) 85%, black);
+        cursor: pointer;
+      }
+    }
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--button) 85%, black);
+      cursor: pointer;
+    }
+
+    &:disabled {
+      cursor: auto;
+      opacity: 0.5;
+    }
+  }
+}
+
+.place-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-width: 50%;
+
+  &--info {
+    border-radius: 25px;
+    // background-color: color-mix(in srgb, var(--background) 98%, black);
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  &__name {
     text-align: center;
     padding: 2rem;
     text-transform: uppercase;
   }
 
-  &__info{
+  &__info {
     margin-bottom: 2rem;
   }
 
@@ -15,7 +124,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-width: 50%;
   }
 
@@ -26,9 +135,9 @@
     max-width: 100%;
 
     border-radius: 16px;
-    border: 2px solid var(--dark-green1);
+    border: 2px solid var(--button-add);
     color: var(--black);
-    background-color: var(--mint3);
+    // background-color: var(--mint3);
 
     option {
       color: var(--black);
@@ -36,34 +145,49 @@
   }
 
   label {
+    padding: 0 3rem 1rem 0;
     text-align: center;
     color: var(--black);
   }
 
   &__button {
     padding: 0.5rem 1rem;
+    margin-left: 1rem;
     text-align: center;
     font-size: 1rem;
     cursor: pointer;
     border-radius: 20px;
-    border: 2px solid var(--dark-green1);
+    border: 2px solid var(--button-add);
     color: var(--white);
     background-color: transparent;
     transition: background-color 0.3s;
   }
 
-    &__button:hover {
-        background-color: var(--dark-green1);
-        color: var(--mint1);
-    }
+  &__button:hover {
+    background-color: var(--button-add);
+    color: var(--white);
+  }
 
+  &__comments {
+    width: 100%;
+    padding: 1rem;
+  }
 
-    &__comment{
-      list-style: none;
-      margin-bottom: 1rem;
-    }
+  &__comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    list-style: none;
+    text-align: left;
 
-    &__addcomment{
-      margin-top: 2rem;;
+    &-date {
+      color: var(--button);
     }
+  }
+
+  &__addcomment {
+    margin-top: 2rem;
+  }
 }
