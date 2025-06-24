@@ -32,6 +32,7 @@ export class MapScreenComponent implements OnInit {
   @Input()
   public set placeList(response: any) {
     this._placeList = response;
+    this.placeListShow = response
   }
 
   @Output() callForData = new EventEmitter();
@@ -40,14 +41,7 @@ export class MapScreenComponent implements OnInit {
 
   @ViewChild(MapComponent) MapComponent!: MapComponent;
 
-  addNewPlaceForm = new FormGroup({
-    type: new FormControl('', [Validators.required]),
-    title: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-  });
-
-  addNewPlace = false;
-  newPlacePosition: [number, number] = [0, 0];
+  placeListShow: IPlace[] = []
 
   ngOnInit() {
     this.callForDataRequest();
@@ -78,6 +72,15 @@ export class MapScreenComponent implements OnInit {
       );
       return distanceA - distanceB;
     });
+  }
+
+  filterPlaceList(filter: string){
+    if(filter === 'wszystkie'){
+      this.placeListShow = this._placeList
+    }
+    else{
+      this.placeListShow = this._placeList.filter(place => place.type === filter);
+    }
   }
 
   sendChangeScreenRequest(screen: string) {

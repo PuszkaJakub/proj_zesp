@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: space-between;
 
   width: 100vw;
-  height: 100vh;
-  // max-height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
   max-width: 2000px;
   background-color: var(--background);
   border-radius: 25px;
@@ -19,11 +19,13 @@
 
 .map-container {
   position: relative;
-  height: 50vh;
+
+  align-self: flex-start;
+  height: 100%;
   width: 100%;
 }
 #map {
-  // height: 50vh;
+  height: 100%;
   width: 100%;
   min-height: 50vh;
 }
@@ -31,13 +33,14 @@
 .content {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100vw;
   height: auto;
   min-width: 80%;
   max-width: 1800px;
   margin: 0 3rem;
+  padding: 1rem;
 }
 
 .bar {
@@ -70,6 +73,7 @@
       text-decoration: none;
       border-radius: 25px;
       transition: background-color 0.3s;
+      color: #fff;
       background-color: var(--nav);
 
       &:visited {
@@ -94,12 +98,14 @@
 }
 
 .place-item {
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   min-width: 50%;
+  margin: 0 1rem;
 
   &--info {
     border-radius: 25px;
@@ -117,7 +123,9 @@
   }
 
   &__info {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    max-height: 20vh;
+    overflow-y: scroll;
   }
 
   &__inputbox {
@@ -130,7 +138,7 @@
 
   &__input {
     margin: 0rem 1rem 1rem;
-    padding: 0.5rem;
+    padding: 0 0.5rem 0.5rem;
     min-width: 50%;
     max-width: 100%;
 
@@ -170,20 +178,32 @@
 
   &__comments {
     width: 100%;
-    padding: 1rem;
+    max-height: 28vh;
+
+    overflow-y: scroll;
   }
 
   &__comment {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    padding: 1rem;
     margin-bottom: 1.2rem;
     list-style: none;
     text-align: left;
+    border-radius: 25px;
+    background-color: color-mix(in srgb, var(--item) 55%, white);
 
     &-date {
-      color: var(--button);
+      margin-bottom: 0.5rem;
+      color: var(--info);
+    }
+
+    &-content{
+      width: 100%;
+      overflow-wrap: break-word; // nowszy odpowiednik
     }
   }
 

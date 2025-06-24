@@ -46,7 +46,8 @@ export class PlaceInfoComponent {
 
   @ViewChild(MapComponent) MapComponent!: MapComponent;
 
-  constructor(private touristApi: TouristApiService) {console.log("krowa")
+  constructor(private touristApi: TouristApiService) {
+    console.log('krowa');
   }
 
   addNewCommentForm = new FormGroup({
@@ -58,6 +59,9 @@ export class PlaceInfoComponent {
     console.log('dupa');
     this.MapComponent.addMarkers([this._place!]);
     this.MapComponent.centerMap(this.place!.coords);
+    this.touristApi.getComments(this._place!.id).subscribe((response) => {
+      this.comments = response;
+    });
   }
 
   addNewCommentSubmit() {

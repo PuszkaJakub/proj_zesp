@@ -9,15 +9,16 @@
         <button class="place__button place__button--addplace" (click)="sendChangeScreenRequest('add-place')">+ Dodaj nowe
             miejsce</button>
         <div class="buttons-bar">
-            <button class="buttons-bar__button">atrakcje</button>
-            <button class="buttons-bar__button">restauracje</button>
-            <button class="buttons-bar__button">widoki</button>
-            <button class="buttons-bar__button">wypoczynek</button>
-            <button class="buttons-bar__button">zabytki</button>
+            <button class="buttons-bar__button" (click)="filterPlaceList('wszystkie')">wszystkie</button>
+            <button class="buttons-bar__button" (click)="filterPlaceList('atrakcja')">atrakcje</button>
+            <button class="buttons-bar__button" (click)="filterPlaceList('restauracja')">restauracje</button>
+            <button class="buttons-bar__button" (click)="filterPlaceList('widok')">widoki</button>
+            <button class="buttons-bar__button" (click)="filterPlaceList('wypoczynek')">wypoczynek</button>
+            <button class="buttons-bar__button" (click)="filterPlaceList('zabytek')">zabytki</button>
         </div>
 
         <ul class="places__list">
-            @for(place of placeList; track place.id){
+            @for(place of placeListShow; track place.id){
             <li class="place" (click)="sendShowPlaceInfoRequest(place.coords, place)">
                 <img class="place__image" [src]="'/img/' + place.type + '.svg'" alt="{{place.title}}">
                 <div class="place__item">

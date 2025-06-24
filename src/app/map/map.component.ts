@@ -27,44 +27,32 @@ export class MapComponent {
       case 'atrakcja':
         return L.icon({
           iconUrl: '/img/atrakcja.svg',
-          iconSize: [38, 95],
-          iconAnchor: [22, 94],
-          popupAnchor: [-3, -76],
+          iconSize: [35, 35],
         });
       case 'restauracja':
         return L.icon({
           iconUrl: '/img/restauracja.svg',
-          iconSize: [30, 70],
-          iconAnchor: [15, 70],
-          popupAnchor: [0, -60],
+          iconSize: [35, 35],
         });
       case 'widok':
         return L.icon({
           iconUrl: '/img/widok.svg',
-          iconSize: [35, 80],
-          iconAnchor: [17, 80],
-          popupAnchor: [0, -70],
+          iconSize: [35, 35],
         });
       case 'wypoczynek':
         return L.icon({
           iconUrl: '/img/wypoczynek.svg',
-          iconSize: [35, 80],
-          iconAnchor: [17, 80],
-          popupAnchor: [0, -70],
+          iconSize: [35, 35],
         });
       case 'zabytek':
         return L.icon({
           iconUrl: '/img/zabytek.svg',
-          iconSize: [35, 80],
-          iconAnchor: [17, 80],
-          popupAnchor: [0, -70],
+          iconSize: [35, 35],
         });
       default:
         return L.icon({
           iconUrl: '/img/atrakcja.svg',
-          iconSize: [25, 60],
-          iconAnchor: [12, 60],
-          popupAnchor: [0, -50],
+          iconSize: [35, 35],
         });
     }
   }
